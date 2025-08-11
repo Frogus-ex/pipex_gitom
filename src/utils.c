@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlorette <tlorette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:27:14 by tlorette          #+#    #+#             */
-/*   Updated: 2025/08/07 13:53:14 by tlorette         ###   ########.fr       */
+/*   Updated: 2025/08/11 11:51:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,21 @@ int	pip_error(char *var, char *msg)
 	return (-1);
 }
 
-int	is_here_doc(char **av, int ac)
+int	is_here_doc(char **av)
 {
-	if (av[1] == "here_doc")
+	if (ft_strncmp(av[1], "here_doc", 9) == 0)
 		return (0);
 	return (-1);
+}
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	if (!tab)
+		return ;
+	i = -1;
+	while(tab[++i])
+		free(tab[i]);
+	free(tab);
 }

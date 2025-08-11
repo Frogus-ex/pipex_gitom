@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlorette <tlorette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:17:08 by tlorette          #+#    #+#             */
-/*   Updated: 2025/08/07 14:37:44 by tlorette         ###   ########.fr       */
+/*   Updated: 2025/08/11 12:25:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ typedef struct s_pipex
 	char	**av;
 }	t_pipex;
 
-int	main(int ac, char **av, char **env);
-int	check_args(int ac);
-int	pip_error(char *str);
-int	is_here_doc(char **av, int ac);
-
+int		main(int ac, char **av, char **env);
+int		check_args(int ac);
+int		pip_error(char *var, char *msg);
+int		is_here_doc(char **av);
+void	free_tab(char **tab);
 
 #endif

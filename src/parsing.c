@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlorette <tlorette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:20:25 by tlorette          #+#    #+#             */
-/*   Updated: 2025/08/07 18:48:27 by tlorette         ###   ########.fr       */
+/*   Updated: 2025/08/11 12:33:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,54 @@ void	open_outfile(t_pipex *pipex)
 		pipex->fd_out = fd;
 }
 
-void	get_env(char *name, char **env)
+char	*get_env(char *path, char **env)
 {
 	int		i;
 	int		j;
-	char	sub;
+	char	*sub;
 
+	i = 0;
 	while (env[i])
 	{
 		j = 0;
 		while (env[i][j] && env[i][j] != '=')
 			j++;
 		sub = ft_substr(env[i], 0, j);
-		if (ft_strncmp(sub, name, ft_strlen(env[i])) == 0)
+		if (ft_strncmp(sub, path, ft_strlen(env[i])) == 0)
 		{
 			free(sub);
 			return (env[i] + j + 1);
 		}
-		free(sub)
+		free(sub);
 		i++;
 	}
 	return (NULL);
+}
+
+char	*get_path(char *cmd, char **env)
+{
+	int		i;
+	char	**all_path;
+	char	*part_path;
+	char	**s_cmd;
+	char	*exec;
+
+	i = -1;
+	all_path = ft_split(get_env("PATH", env), ':');
+	s_cmd = ft_split(cmd, ' ');
+	while (all_path[++i])
+	{
+		part_path = ft_strjoin(all_path[i], "/");
+		exec = ft_strjoin(part_path, s_cmd[0]);
+		free(part_path);
+		if (access(exec, F_OK | X_OK) == 0)
+		{
+			free_tab(s_cmd);
+			return (exec);
+		}
+		free(exec);
+	}
+	free_tab(all_path);
+	free_tab(s_cmd);
+	return (cmd);
 }
