@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tlorette <tlorette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:17:08 by tlorette          #+#    #+#             */
-/*   Updated: 2025/08/11 12:25:43 by marvin           ###   ########.fr       */
+/*   Updated: 2025/08/12 16:24:20 by tlorette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,11 @@
 # include "libft.h"
 # include "ft_printf.h"
 
-typedef struct s_pipex
-{
-	int		is_here_doc;
-	int		cmd_count;
-	int		ac;
-	int		fd_out;
-	int		fd_in;
-	char	*infile;
-	char	*outfile;
-	char	**cmd1;
-	char	**cmd2;
-	char	**env;
-	char	**av;
-}	t_pipex;
-
 int		main(int ac, char **av, char **env);
-int		check_args(int ac);
-int		pip_error(char *var, char *msg);
-int		is_here_doc(char **av);
+int		open_files(char *file, int in_or_out);
+void	ft_error(int n_exit);
 void	free_tab(char **tab);
+char	*is_path(char *path, char **env);
+char	*get_path(char *cmd, char **env);
 
 #endif

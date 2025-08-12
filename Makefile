@@ -1,7 +1,6 @@
 NAME    = pipex
 SRC     = src/main.c \
 			src/parsing.c \
-			src/utils.c
 
 OBJ     = $(SRC:.c=.o)
 CFLAGS  = -Wall -Wextra -Werror -ggdb
@@ -14,8 +13,6 @@ all: $(NAME)
 $(NAME): $(OBJ) $(LIBFT) $(PRINTF)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(PRINTF)
 	@echo "COMPILATION DONE ! 👍"
-	@rm -f $(OBJ)
-	@echo "Object files cleaned 🧹"
 
 $(LIBFT):
 	@make -C ./libft > /dev/null 2>&1
