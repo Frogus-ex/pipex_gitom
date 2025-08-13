@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlorette <tlorette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:20:25 by tlorette          #+#    #+#             */
-/*   Updated: 2025/08/12 16:56:04 by tlorette         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:42:27 by tlorette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	ft_error(int n_exit)
 {
@@ -42,6 +42,8 @@ int	open_files(char *file, int in_or_out)
 		fd = open(file, O_RDONLY, 0777);
 	if (in_or_out == 1)
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (in_or_out == 2)
+		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	if (in_or_out == -1)
 		exit (0);
 	return (fd);

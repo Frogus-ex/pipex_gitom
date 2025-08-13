@@ -6,18 +6,11 @@
 /*   By: tlorette <tlorette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:27:14 by tlorette          #+#    #+#             */
-/*   Updated: 2025/08/13 10:18:45 by tlorette         ###   ########.fr       */
+/*   Updated: 2025/08/13 12:50:44 by tlorette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-int	is_here_doc(char **av)
-{
-	if (ft_strncmp(av[1], "here_doc", 9) == 0)
-		return (0);
-	return (-1);
-}
 
 void	exec(char	*cmd, char **env)
 {
