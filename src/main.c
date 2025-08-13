@@ -6,7 +6,7 @@
 /*   By: tlorette <tlorette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:27:14 by tlorette          #+#    #+#             */
-/*   Updated: 2025/08/12 17:26:39 by tlorette         ###   ########.fr       */
+/*   Updated: 2025/08/13 10:18:45 by tlorette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ int	is_here_doc(char **av)
 
 void	exec(char	*cmd, char **env)
 {
-	char	**s_cmd;
+	char	**split_cmd;
 	char	*path;
 
-	s_cmd = ft_split(cmd, ' ');
-	path = get_path(s_cmd[0], env);
-	if (execve(path, s_cmd, env) == -1)
+	split_cmd = ft_split(cmd, ' ');
+	path = get_path(split_cmd[0], env);
+	if (execve(path, split_cmd, env) == -1)
 	{
 		ft_putstr_fd("pipex: command not found: ", 2);
-		ft_putendl_fd(s_cmd[0], 2);
-		free_tab(s_cmd);
+		ft_putendl_fd(split_cmd[0], 2);
+		free_tab(split_cmd);
 		exit (0);
 	}
 }
