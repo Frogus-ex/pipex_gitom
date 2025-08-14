@@ -1,4 +1,0 @@
-hello world
-test line
-another line
-hello again
