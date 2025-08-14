@@ -6,7 +6,7 @@
 /*   By: tlorette <tlorette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:27:14 by tlorette          #+#    #+#             */
-/*   Updated: 2025/08/13 12:50:44 by tlorette         ###   ########.fr       */
+/*   Updated: 2025/08/14 13:22:58 by tlorette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(int ac, char **av, char **env)
 	if (ac != 5)
 		ft_error(1);
 	if (pipe(pip_fd) == -1)
-		ft_error(-1);
+		ft_error(1);
 	pid1 = fork();
 	if (pid1 == -1)
 		exit(-1);
