@@ -2,10 +2,12 @@ NAME    = pipex
 NAME_BONUS = pipex_bonus
 
 SRC     = src/main.c \
-			src/parsing.c
+			src/parsing.c \
+			src/utils.c
 
 SRC_BONUS = src_bonus/main_bonus.c \
 			src_bonus/parsing_bonus.c \
+			src_bonus/utils_bonus.c \
 			$(GNL)
 
 OBJ     = $(SRC:.c=.o)

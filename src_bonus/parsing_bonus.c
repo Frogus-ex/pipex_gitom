@@ -6,7 +6,7 @@
 /*   By: tlorette <tlorette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:20:25 by tlorette          #+#    #+#             */
-/*   Updated: 2025/08/13 17:42:27 by tlorette         ###   ########.fr       */
+/*   Updated: 2025/08/15 14:25:17 by tlorette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	ft_error(int n_exit)
 {
 	if (n_exit == 1)
 	{
-		ft_putstr_fd("ERROR IN DECLARATION ! PIPEX MUST BE DECLARED LIKE ", 2);
-		ft_putstr_fd("THIS -> ./pipex infile cmd cmd outfile\n", 2);
+		ft_putstr_fd("ERROR IN DECLARATION ! ", 2);
+		ft_putstr_fd("./pipex_bonus here_doc Limiter cmd\n", 2);
 	}
 	exit (0);
 }
@@ -44,8 +44,12 @@ int	open_files(char *file, int in_or_out)
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (in_or_out == 2)
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
-	if (in_or_out == -1)
-		exit (0);
+	if (fd == -1)
+	{
+		perror(file);
+		close(fd);
+		exit(1);
+	}
 	return (fd);
 }
 

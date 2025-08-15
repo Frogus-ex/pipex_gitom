@@ -6,7 +6,7 @@
 /*   By: tlorette <tlorette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:17:08 by tlorette          #+#    #+#             */
-/*   Updated: 2025/08/13 16:54:50 by tlorette         ###   ########.fr       */
+/*   Updated: 2025/08/15 17:45:24 by tlorette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*get_path(char *cmd, char **env);
 void	exec(char *cmd, char **env);
 char	*is_here_doc(char **av, int *p_fd);
 void	fill_pipe(char *cmd, char **env);
+int		outfile_mode(char *av);
 int		main(int ac, char **av, char **env);
+void	check_empty_args(int ac, char **av);
 
 #endif

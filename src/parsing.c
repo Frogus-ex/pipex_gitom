@@ -6,21 +6,11 @@
 /*   By: tlorette <tlorette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:20:25 by tlorette          #+#    #+#             */
-/*   Updated: 2025/08/14 15:44:54 by tlorette         ###   ########.fr       */
+/*   Updated: 2025/08/15 16:51:46 by tlorette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	ft_error(int n_exit)
-{
-	if (n_exit == 1)
-	{
-		ft_putstr_fd("ERROR IN DECLARATION ! PIPEX MUST BE DECLARED LIKE ", 2);
-		ft_putstr_fd("THIS -> ./pipex infile cmd cmd outfile\n", 2);
-	}
-	exit (0);
-}
 
 void	free_tab(char **tab)
 {
@@ -39,13 +29,13 @@ int	open_files(char *file, int in_or_out)
 	int	fd;
 
 	if (in_or_out == 0)
-		fd = open(file, O_RDONLY, 0777);
+		fd = open(file, O_RDONLY);
 	if (in_or_out == 1)
-		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{
 		perror(file);
-		exit(1);
+		return (-1);
 	}
 	return (fd);
 }
@@ -74,6 +64,20 @@ char	*is_path(char *path, char **env)
 	return (NULL);
 }
 
+char	**get_all_path(char **env)
+{
+	char	**all_path;
+	char	*path_env;
+
+	path_env = is_path("PATH", env);
+	if (!path_env)
+		return (NULL);
+	all_path = ft_split(path_env, ':');
+	if (!all_path)
+		return (NULL);
+	return (all_path);
+}
+
 char	*get_path(char *cmd, char **env)
 {
 	int		i;
@@ -83,7 +87,7 @@ char	*get_path(char *cmd, char **env)
 	char	*exec;
 
 	i = -1;
-	all_path = ft_split(is_path("PATH", env), ':');
+	all_path = get_all_path(env);
 	split_cmd = ft_split(cmd, ' ');
 	while (all_path[++i])
 	{
@@ -92,6 +96,7 @@ char	*get_path(char *cmd, char **env)
 		free(part_path);
 		if (access(exec, F_OK | X_OK) == 0)
 		{
+			free_tab(all_path);
 			free_tab(split_cmd);
 			return (exec);
 		}
